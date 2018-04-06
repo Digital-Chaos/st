@@ -5,18 +5,18 @@ VERSION = 0.8.1
 
 # paths
 PREFIX = /usr/local
-MANPREFIX = $(PREFIX)/share/man
+MANPREFIX = $(PREFIX)/man
 
-X11INC = /usr/X11R6/include
-X11LIB = /usr/X11R6/lib
+X11INC = /usr/local/include
+X11LIB = /usr/local/lib
+
+# freetype
+FREETYPELIBS = -lfontconfig -lXft
+FREETYPEINC  = /usr/local/include/freetype2
 
 # includes and libs
-INCS = -I$(X11INC) \
-       `pkg-config --cflags fontconfig` \
-       `pkg-config --cflags freetype2`
-LIBS = -L$(X11LIB) -lm -lrt -lX11 -lutil -lXft \
-       `pkg-config --libs fontconfig` \
-       `pkg-config --libs freetype2`
+INCS = -I$(X11INC) -I$(FREETYPEINC)
+LIBS = -L$(X11LIB) -lm -lrt -lX11 -lutil $(FREETYPELIBS)
 
 # flags
 CPPFLAGS = -DVERSION=\"$(VERSION)\" -D_XOPEN_SOURCE=600
